@@ -1,0 +1,64 @@
+
+<div class="modal" ng-controller="KisBpmConditionExpressionPopupCtrl">
+<div class="modal-dialog" style="width:750px;">
+<div class="modal-content">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">&times;</button>
+    <h2 translate>PROPERTY.SEQUENCEFLOW.CONDITION.TITLE</h2>
+</div>
+<div class="modal-body">
+    <div class="row form-inline" ng-repeat="condition in conditionList" style="margin-bottom:5px;">
+            <div class="col-md-2" style="text-align: right">
+                <div class="form-group">
+                    <button class="btn btn-default" type="button" ng-click="changeParentheses('left',condition)">(</button>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-show="condition.leftParentheses" value="(" readonly style="background: none;width: 30px;">
+                    <input type="text" class="form-control" ng-show="!condition.leftParentheses" readonly style="background: none;width: 30px;">
+                </div>
+            </div>
+        <div class="col-md-6" style="padding-left: 0;padding-right: 0">
+            <div class="form-group">
+                <select class="form-control" ng-change="optionChange(condition)" ng-model="condition.fieldName">
+                    <option ng-repeat="option in options" value="{{option.fieldName}}" ng-selected="{{option.fieldName==condition.fieldName}}">{{option.name}}</option>
+                </select>
+            </div>
+            <div class="form-group" ng-show="condition.selectType=='1'">
+                <select class="form-control" ng-model="condition.scope" ng-change="scopeChange(condition)">
+                    <option ng-repeat="cccc in conditions" value="{{cccc.value}}" ng-selected="{{cccc.value==condition.scope}}">{{cccc.label}}</option>
+                </select>
+                <input type="text" class="form-control" ng-model="condition.value">
+            </div>
+            <div class="form-group" ng-show="condition.selectType=='2'" >
+                <select class="form-control" ng-model="condition.value">
+                    <option ng-repeat="dict in dicts[condition.fieldName]" value="{{dict.code}}" ng-selected="{{dict.code==condition.value}}">{{dict.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="text" class="form-control" ng-show="condition.rightParentheses" value=")" readonly style="background: none;width: 30px;">
+                <input type="text" class="form-control" ng-show="!condition.rightParentheses" readonly style="background: none;width: 30px;">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="button" ng-click="changeParentheses('right',condition)">)</button>
+            </div>
+            <div class="form-group">
+                <select class="form-control" ng-model="condition.logic" ng-show="conditionList.length!=1">
+                    <option ng-repeat="logic in logicConditions" value="{{logic.value}}" ng-selected="{{logic.value==condition.logic}}">{{logic.label}}</option>
+                </select>
+            </div>
+            <div class="form-group" ng-show="conditionList.length!=1">
+                <button class="btn btn-default" type="button" ng-click="removeCondition($index)">-</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="addCondition()">+</button>
+        <button ng-click="close()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+        <button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+    </div>
+</div>
+</div>
+</div>
