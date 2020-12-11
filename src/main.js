@@ -9,6 +9,7 @@ import store from './store/'
 import i18n from './locales'
 import { VueAxios } from './utils/request'
 import ProLayout, { PageHeaderWrapper } from '@ant-design-vue/pro-layout'
+import { STable } from '@/components'
 
 // import { GetEnumItems, exportDataExcel } from '@/api/common'
 import themePluginConfig from '../config/themePluginConfig'
@@ -16,6 +17,7 @@ import '@/permission'
 
 import bootstrap from './core/bootstrap'
 import './core/lazy_use'
+import dataV from '@jiaminghi/data-view'
 
 import './utils/filter' // global filter
 import './global.less'
@@ -31,6 +33,7 @@ Vue.use(dataV)
 Vue.use(VueAxios)
 Vue.component('pro-layout', ProLayout)
 Vue.component('page-header-wrapper', PageHeaderWrapper)
+Vue.component('STable', STable)
 
 window.umi_plugin_ant_themeVar = themePluginConfig.theme
 

@@ -1,14 +1,20 @@
+
 <template>
-  <div id="china_map" style="width: 100%; height: 100%"></div>
+  <div id="chinaCity_map" style="width: 100%; height: 100%"></div>
 </template>
 
 <script>
-import chinaJson from 'echarts/map/json/china.json'
+import chinaCities from './china-cities.json'
 // china-cities
 // china-contour
 // world
 
 export default {
+  props: {
+    provinceId: {
+      default: 34
+    }
+  },
   data() {
     return {
       chartOption: null
@@ -18,8 +24,20 @@ export default {
     this.drawMapChart()
   },
   methods: {
+    getMapJson() {
+      const reg = new RegExp(`\^${this.provinceId}\\d{4}\$`)
+      return {
+        UTF8Encoding: true,
+        type: 'FeatureCollection',
+        features: chinaCities.features.filter(item => reg.test(item.id))
+      }
+    },
     drawMapChart() {
-      this.$echarts.registerMap('china', chinaJson)
+      // const mapJson = this.getMapJson()
+      // console.log(mapJson)
+      // debugger
+      // 初始化echarts实例
+      this.$echarts.registerMap('chinaCity_map', chinaCities)
       this.chinachart = this.$echarts.init(document.getElementById('china_map'))
       // 进行相关配置
       this.chartOption = {
@@ -105,7 +123,6 @@ export default {
             // 这是需要配置地图上的某个地区的数据，根据后台的返回的数据进行拼接（下面是我定义的假数据）
             data: [
               {
-                id: '110000',
                 name: '北京',
                 value: 599,
                 perf: '0.501s', // 性能
@@ -113,55 +130,18 @@ export default {
                 usability: '100%', // 可用性
                 point: '250' // 监测点
               },
-              { id: '310000', name: '上海', value: 142 },
-              { id: '230000', name: '黑龙江', value: 806 },
-              {
-                name: '新疆',
-                id: '650000',
-                value: 999,
-                perf: '0.501s', // 性能
-                downloadSpeep: '1.221MB/s', // 下载速度
-                usability: '100%', // 可用性
-                point: '250' // 监测点
-              },
-              { id: '630000', name: '青海', value: 205 },
-              { id: '420000', name: '湖北', value: 810 },
-              { id: '510000', name: '四川', value: 453 },
-              { id: '710000', name: '台湾' },
-              { id: '130000', name: '河北' },
-              { id: '140000', name: '山西' },
-              { id: '150000', name: '内蒙古' },
-              { id: '210000', name: '辽宁' },
-              { id: '220000', name: '吉林' },
-              { id: '320000', name: '江苏' },
-              { id: '330000', name: '浙江' },
-              { id: '340000', name: '安徽' },
-              { id: '350000', name: '福建' },
-              { id: '360000', name: '江西' },
-              { id: '370000', name: '山东' },
-              { id: '410000', name: '河南' },
-              { id: '430000', name: '湖南' },
-              { id: '440000', name: '广东' },
-              { id: '450000', name: '广西' },
-              { id: '460000', name: '海南' },
-              { id: '520000', name: '贵州' },
-              { id: '530000', name: '云南' },
-              { id: '540000', name: '西藏' },
-              { id: '610000', name: '陕西' },
-              { id: '620000', name: '甘肃' },
-              { id: '640000', name: '宁夏' },
-              { id: '120000', name: '天津' },
-              { id: '500000', name: '重庆' },
-              { id: '810000', name: '香港' },
-              { id: '820000', name: '澳门' }
+              { name: '合肥', value: 142 },
+              { name: '芜湖', value: 15 },
+              { name: '淮南', value: 300 },
+              { name: '淮北', value: 680 }
             ]
           }
         ]
       }
-      const _this = this
-      this.chinachart.on('click', params => {
-        _this.$message.info(`钻取参数：${JSON.stringify(params.data)}`)
-        _this.$emit('elementClick', params)
+      // 使用刚指定的配置项和数据显示地图数据
+      this.chinachart.on('click', function(params) {
+        // 控制台打印数据的名称
+        console.log(params)
       })
       this.chinachart.setOption(this.chartOption)
     }

@@ -1,9 +1,9 @@
 <template>
-  <div id="china_map" style="width: 100%; height: 100%"></div>
+  <div id="city_map" style="width: 100%; height: 100%"></div>
 </template>
 
 <script>
-import chinaJson from 'echarts/map/json/china.json'
+import cityJson from './china-cities.json'
 // china-cities
 // china-contour
 // world
@@ -18,9 +18,19 @@ export default {
     this.drawMapChart()
   },
   methods: {
+     getMapJson() {
+      const reg = new RegExp(`\^${this.provinceId}\\d{4}\$`)
+      return {
+        UTF8Encoding: true,
+        type: 'FeatureCollection',
+        features: cityJson.features.filter(item => reg.test(item.id))
+      }
+    },
     drawMapChart() {
-      this.$echarts.registerMap('china', chinaJson)
-      this.chinachart = this.$echarts.init(document.getElementById('china_map'))
+        // const mapJson = this.getMapJson()
+      // console.log(mapJson)
+      this.$echarts.registerMap('安徽', cityJson)
+      this.chinachart = this.$echarts.init(document.getElementById('city_map'))
       // 进行相关配置
       this.chartOption = {
         tooltip: {
@@ -158,10 +168,10 @@ export default {
           }
         ]
       }
-      const _this = this
-      this.chinachart.on('click', params => {
-        _this.$message.info(`钻取参数：${JSON.stringify(params.data)}`)
-        _this.$emit('elementClick', params)
+      // 使用刚指定的配置项和数据显示地图数据
+      this.chinachart.on('click', function(params) {
+        // 控制台打印数据的名称
+        console.log(params)
       })
       this.chinachart.setOption(this.chartOption)
     }

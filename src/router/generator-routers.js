@@ -49,6 +49,80 @@ const rootRouter = {
       component: () => import('@/views/dashboard/Dashboard'),
       meta: { title: '主页大屏', icon: 'home', menuId: null }
     },
+    {
+      name: 'demos',
+      path: '/demos',
+      component: RouteView,
+      meta: { title: '营收稽核' },
+      children: [
+        {
+          name: 'demo1',
+          path: 'demo1',
+          component: () => import('@/views/demos/demo1'),
+          meta: { title: '支票/网银汇款一级稽核', }
+        },
+        {
+          name: 'demo2',
+          path: 'demo2',
+          component: () => import('@/views/demos/demo2'),
+          meta: { title: '社会渠道资金稽核-一级稽核', }
+        },
+        {
+          name: 'demo3',
+          path: 'demo3',
+          component: () => import('@/views/demos/demo3'),
+          meta: { title: '社会渠道二级稽核', }
+        },
+        {
+          name: 'demo4',
+          path: 'demo4',
+          component: () => import('@/views/demos/demo4'),
+          meta: { title: '社会渠道二级稽核月结', }
+        },
+        {
+          name: 'demo5',
+          path: 'demo5',
+          component: () => import('@/views/demos/demo5'),
+          meta: { title: '电子渠道一级稽核', }
+        },
+        {
+          name: 'demo6',
+          path: 'demo6',
+          component: () => import('@/views/demos/demo6'),
+          meta: { title: '电子渠道二级稽核', }
+        },
+        {
+          name: 'demo7',
+          path: 'demo7',
+          component: () => import('@/views/demos/demo7'),
+          meta: { title: '电子渠道二级稽核月结', }
+        },
+        {
+          name: 'demo8',
+          path: 'demo8',
+          component: () => import('@/views/demos/demo8'),
+          meta: { title: '政企渠道一级稽核', }
+        },
+        {
+          name: 'demo9',
+          path: 'demo9',
+          component: () => import('@/views/demos/demo9'),
+          meta: { title: '政企渠道二级稽核', }
+        },
+        {
+          name: 'demo10',
+          path: 'demo10',
+          component: () => import('@/views/demos/demo10'),
+          meta: { title: '政企渠道二级稽核月结', }
+        },
+        {
+          name: 'demo11',
+          path: 'demo11',
+          component: () => import('@/views/demos/demo11'),
+          meta: { title: '直营店日结-支票/网银汇款', }
+        },
+      ]
+    },
 
   ]
 }

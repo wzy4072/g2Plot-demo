@@ -110,10 +110,10 @@ const vueConfig = {
       warnings: false,
       errors: false
     },
-    // host: '192.168.2.149',
-    host: 'localhost',
+    host: '192.168.2.149',
+    // host: 'localhost',
     // development server port 8000
-    port: 8888,
+    port: 9999,
     // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
     proxy: {
       '/api': {
@@ -124,9 +124,9 @@ const vueConfig = {
         // target: 'http://192.168.1.254:7000',  // mf    
         // target: 'http://192.168.1.211:7000',  // dmz
         // target: 'http://192.168.2.96:7000',  // KY
-        target: 'http://192.168.1.186:7000',  //dq
+        // target: 'http://192.168.1.186:7000',  //dq
         // target: 'http://192.168.3.38:7000',  //dq
-        // target: 'http://192.168.0.72:8090/proxy/ent',  // 72演示环境
+        target: 'http://192.168.0.72:7100',  // 72演示环境
         // target: 'http://192.168.2.105:7000',  //公司开发环境  新版的后端系统（对应vue） 
         // target: 'http://192.168.0.71:7000',     //  原版的后端系统(对应layui)        
         ws: false,
