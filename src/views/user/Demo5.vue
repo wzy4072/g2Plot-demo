@@ -3,7 +3,7 @@
     <dv-full-screen-container>
       <div class="main-header">
         <div class="mh-left"></div>
-        <div class="mh-middle">营收资金稽核?</div>
+        <div class="mh-middle">大屏DEMO</div>
         <div class="mh-right">
           <dv-border-box-2
             @click.native="timeout = !timeout"
@@ -14,12 +14,9 @@
 
       <dv-border-box-1 class="main-container">
         <dv-border-box-3 class="left-chart-container">
-          <div class="title1">代理商划扣失败预警</div>
-          <Pie1></Pie1>
-          <div class="title1">电子渠道营业收入分布</div>
-          <Pie2></Pie2>
-          <div class="title1">政企渠道大额欠款</div>
-          <Pie3></Pie3>
+          <Gauge></Gauge>
+          <Gauge></Gauge>
+          <Radar :autoUpdate="timeout"></Radar>
           <TinyLine></TinyLine>
         </dv-border-box-3>
 
@@ -37,14 +34,25 @@
 
             <div class="rmctc-right-container">
               <dv-border-box-3 class="rmctc-chart-1">
-                <p class="title2">直营店营业收入</p>
-                <Column1></Column1>
+                <BidirectionalBar
+                  :autoUpdate="timeout"
+                  @elementClick="
+            (v) => {
+              barTitle2 = v.country
+            }
+          "
+                ></BidirectionalBar>
               </dv-border-box-3>
 
               <dv-border-box-4 class="rmctc-chart-2" :reverse="true">
-                <p class="title2">直营店尾款情况(前五)</p>
-
-                <Column2></Column2>
+                <Bar
+                  :autoUpdate="timeout"
+                  @elementClick="
+            (v) => {
+              barTitle = v.type
+            }
+          "
+                ></Bar>
               </dv-border-box-4>
             </div>
           </div>
@@ -69,15 +77,9 @@ import Gauge from './AntvCharts/Gauge'
 import BidirectionalBar from './AntvCharts/BidirectionalBar'
 import Radar from './AntvCharts/Radar'
 
-import Column1 from './T1/Column1'
-import Column2 from './T1/Column2'
-import Pie1 from './T1/Pie1'
-import Pie2 from './T1/Pie2'
-import Pie3 from './T1/Pie3'
-
-import ChinaMap from './ChinaMap'
+import ChinaMap from './Demo5/ChinaMap'
 export default {
-  name: 'DataView',
+  name: 'Demo5',
   components: {
     Bar,
     Pie,
@@ -85,12 +87,7 @@ export default {
     Gauge,
     BidirectionalBar,
     Radar,
-    ChinaMap,
-    Column1,
-    Column2,
-    Pie1,
-    Pie2,
-    Pie3
+    ChinaMap
   },
   data() {
     return {
@@ -198,22 +195,5 @@ export default {
   font-size: 19px;
   line-height: 18px;
   padding: 16px 0;
-}
-.title1 {
-  font-size: 18px;
-  color: #2862b7;
-  text-align: center;
-  margin-top: 8px;
-  font-weight: 600;
-}
-p.title2 {
-  font-size: 18px;
-  writing-mode: tb-rl;
-  word-spacing: 23px;
-  color: #2862b7;
-  font-weight: 600;
-
-  letter-spacing: 4px;
-  text-align: center;
 }
 </style>

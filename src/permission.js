@@ -10,10 +10,9 @@ import { i18nRender } from '@/locales'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['login', 'register', 'registerResult','payeeAgreement','temp1','temp2','temp3','temp4'] // no redirect whitelist
+const whiteList = ['login', 'register', 'registerResult','payeeAgreement','temp1','temp2','temp3','temp4','demo5'] // no redirect whitelist
 const loginRoutePath = '/user/login'
 const defaultRoutePath = '/'
-
 router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar
   to.meta && (typeof to.meta.title !== 'undefined' && setDocumentTitle(`${i18nRender(to.meta.title)} - ${domTitle}`))
@@ -24,7 +23,9 @@ router.beforeEach((to, from, next) => {
       NProgress.done()
     } else {
       if (store.getters.addRouters.length === 0) {
+        
         store.dispatch('GenerateRoutes').then((res) => {
+          
           // 根据roles权限生成可访问的路由表
           // 动态添加可访问路由表
           router.addRoutes(res)
@@ -54,6 +55,7 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
+    
     if (whiteList.includes(to.name)) {
       // 在免登录白名单，直接进入
       next()

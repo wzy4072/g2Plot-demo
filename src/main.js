@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime'
 
 import Vue from 'vue'
 import App from './App.vue'
-// import router from './router'
+import router from './router'
 // import store from './store/'
 import i18n from './locales'
 // import { VueAxios } from './utils/request'
@@ -38,7 +38,7 @@ Vue.use(dataV)
 window.umi_plugin_ant_themeVar = themePluginConfig.theme
 
 new Vue({
-  // router,
+  router,
   // store,
   i18n,
   created: bootstrap,
