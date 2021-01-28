@@ -4,12 +4,12 @@ import 'regenerator-runtime/runtime'
 
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store/'
+// import router from './router'
+// import store from './store/'
 import i18n from './locales'
-import { VueAxios } from './utils/request'
-import ProLayout, { PageHeaderWrapper } from '@ant-design-vue/pro-layout'
-import { STable } from '@/components'
+// import { VueAxios } from './utils/request'
+// import ProLayout, { PageHeaderWrapper } from '@ant-design-vue/pro-layout'
+// import { STable } from '@/components'
 
 // import { GetEnumItems, exportDataExcel } from '@/api/common'
 import themePluginConfig from '../config/themePluginConfig'
@@ -30,16 +30,16 @@ Vue.use(dataV)
 // Vue.prototype.comAPI = { GetEnumItems, exportDataExcel }
 
 // mount axios to `Vue.$http` and `this.$http`
-Vue.use(VueAxios)
-Vue.component('pro-layout', ProLayout)
-Vue.component('page-header-wrapper', PageHeaderWrapper)
-Vue.component('STable', STable)
+// Vue.use(VueAxios)
+// Vue.component('pro-layout', ProLayout)
+// Vue.component('page-header-wrapper', PageHeaderWrapper)
+// Vue.component('STable', STable)
 
 window.umi_plugin_ant_themeVar = themePluginConfig.theme
 
 new Vue({
-  router,
-  store,
+  // router,
+  // store,
   i18n,
   created: bootstrap,
   render: h => h(App)
