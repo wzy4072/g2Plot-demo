@@ -12,7 +12,7 @@ export const rootRouter = {
   name: 'tempIndex',
   path: '/',
   component: BasicLayout,
-  redirect: '/dashboard',
+  redirect: '/temp1',
   meta: {
     title: ''
   },
@@ -27,7 +27,6 @@ export const asyncRouterMap = []
  */
 export const constantRouterMap = [
   rootRouter,
-
   {
     name: 'empty',
     path: '/empty',
@@ -47,7 +46,7 @@ export const constantRouterMap = [
       {
         path: '/temp3',
         name: 'temp3',
-        component: () => import(/* webpackChunkName: "t3" */ '@/views/user/Temp3')
+        component: () => import(/* webpackChunkName: "t3" */ '@/views/user/chartGroup/index')
       },
       {
         path: '/temp4',
@@ -57,7 +56,7 @@ export const constantRouterMap = [
       {
         path: '/demo5',
         name: 'demo5',
-        component: () => import(/* webpackChunkName: "t4" */ '@/views/user/Demo5')
+        component: () => import(/* webpackChunkName: "t4" */ '@/views/Demo5/index')
       },
     ]
   },

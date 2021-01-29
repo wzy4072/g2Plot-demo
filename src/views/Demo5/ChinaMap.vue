@@ -11,7 +11,7 @@ import chinaJson from 'echarts/map/json/china.json'
 export default {
   data() {
     return {
-      chartOption: null
+      chartOption: null,
     }
   },
   mounted() {
@@ -26,37 +26,20 @@ export default {
         tooltip: {
           // 鼠标移到图里面的浮动提示框
           // formatter详细配置： https://echarts.baidu.com/option.html#tooltip.formatter
-          //   formatter(params, ticket, callback) {
-          //     // params.data 就是series配置项中的data数据遍历
-          //     let localValue, perf, downloadSpeep, usability, point
-          //     if (params.data) {
-          //       localValue = params.data.value
-          //       perf = params.data.perf
-          //       downloadSpeep = params.data.downloadSpeep
-          //       usability = params.data.usability
-          //       point = params.data.point
-          //     } else {
-          //       // 为了防止没有定义数据的时候报错写的
-          //       localValue = 0
-          //       perf = 0
-          //       downloadSpeep = 0
-          //       usability = 0
-          //       point = 0
-          //     }
-          //     let htmlStr = `
-          //   <div style='font-size:18px;'> ${params.name}</div>
-          //   <p style='text-align:left;margin-top:-10px;'>
-          //     区域对应数据value：${localValue}<br/>
-          //     性能perf：${perf}<br/>
-          //     下载速度downloadSpeep：${downloadSpeep}<br/>
-          //     可用性usability：${usability}<br/>
-          //     监测点数point：${point}<br/>
-          //   </p>
-          // `
-          //     return htmlStr
-          //   },
-          // backgroundColor:"#ff7f50",//提示标签背景颜色
-          // textStyle:{color:"#fff"} //提示标签字体颜色
+          formatter(params, ticket, callback) {
+            // params.data 就是series配置项中的data数据遍历
+
+            let htmlStr = `
+            <p sytle="font-size:18px"> 未归集公司：</p>
+            <p> 数据省数据市数据区公司 </p>
+            <p> 数据省数据市数据区数据省数据市数据区公司 </p>
+            <p> 数据省数据市数据区数据省数据市数据区公司 </p>
+            <p> 数据区公司 </p>
+            `
+            return htmlStr
+          },
+          backgroundColor: '#000620', //提示标签背景颜色
+          textStyle: { color: '#fff' }, //提示标签字体颜色
         },
         // visualMap的详细配置解析：https://echarts.baidu.com/option.html#visualMap
         visualMap: {
@@ -66,14 +49,17 @@ export default {
           itemWidth: 40,
           bottom: 60,
           left: 20,
+            textStyle: {
+            color: '#2862b7b8',
+          },
           pieces: [
             // { gt: 900, lte: 1000, label: '非常好', color: '#469F4B' }, // (900, 1000]
             // { gt: 500, lte: 900, label: '正常', color: '#00BAFF' }, // (500, 900]
             // { gt: 310, lte: 500, label: '警告', color: '#3DE7C9' }, // (310, 500]
             // { gt: 200, lte: 300, label: '较差', color: '#FFC530' }, // (200, 300]
-            { gt: 10, lte: 1000, label: '非常差', color: 'orangered' }, // (10, 200]
-            { value: 0, label: '无数据', color: '#fff' } // [0]
-          ]
+            { gt: 10, lte: 1000, label: '未归集', color: 'rgb(255 69 0 / 80%)' }, // (10, 200]
+            { value: 0, label: '已归集', color: 'rgb(1 55 84 / 50%)' }, // [0]
+          ],
         },
         // geo配置详解： https://echarts.baidu.com/option.html#geo
         geo: {
@@ -82,7 +68,7 @@ export default {
           // roam: true, // 是否开启鼠标缩放和平移漫游
           zoom: 1.2, // 当前视角的缩放比例（地图的放大比例）
           label: {
-            show: false
+            show: false,
           },
           itemStyle: {
             // 地图区域的多边形 图形样式。
@@ -90,17 +76,17 @@ export default {
             emphasis: {
               // 高亮状态下的多边形和标签样式
               shadowBlur: 20,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
+              shadowColor: 'rgba(0, 0, 0, 0.3)',
+            },
+          },
         },
         series: [
           {
-            name: '', // 浮动框的标题（上面的formatter自定义了提示框数据，所以这里可不写）
+            // name: '归集统计', // 浮动框的标题（上面的formatter自定义了提示框数据，所以这里可不写）
             type: 'map',
             geoIndex: 0,
             label: {
-              show: false
+              show: false,
             },
             // 这是需要配置地图上的某个地区的数据，根据后台的返回的数据进行拼接（下面是我定义的假数据）
             data: [
@@ -111,7 +97,7 @@ export default {
                 perf: '0.501s', // 性能
                 downloadSpeep: '1.221MB/s', // 下载速度
                 usability: '100%', // 可用性
-                point: '250' // 监测点
+                point: '250', // 监测点
               },
               { id: '310000', name: '上海', value: 142 },
               { id: '230000', name: '黑龙江', value: 806 },
@@ -122,7 +108,7 @@ export default {
                 perf: '0.501s', // 性能
                 downloadSpeep: '1.221MB/s', // 下载速度
                 usability: '100%', // 可用性
-                point: '250' // 监测点
+                point: '250', // 监测点
               },
               { id: '630000', name: '青海', value: 205 },
               { id: '420000', name: '湖北', value: 810 },
@@ -153,19 +139,27 @@ export default {
               { id: '120000', name: '天津' },
               { id: '500000', name: '重庆' },
               { id: '810000', name: '香港' },
-              { id: '820000', name: '澳门' }
-            ]
-          }
-        ]
+              { id: '820000', name: '澳门' },
+            ],
+          },
+        ],
+        textStyle: {
+          color: '#fff',
+        },
+        legend: {
+          textStyle: {
+            color: '#fc1',
+          },
+        },
       }
       const _this = this
-      this.chinachart.on('click', params => {
+      this.chinachart.on('click', (params) => {
         _this.$message.info(`钻取参数：${JSON.stringify(params.data)}`)
         _this.$emit('elementClick', params)
       })
       this.chinachart.setOption(this.chartOption)
-    }
-  }
+    },
+  },
 }
 </script>
 

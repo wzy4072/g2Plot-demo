@@ -13,7 +13,7 @@ import i18n from './locales'
 
 // import { GetEnumItems, exportDataExcel } from '@/api/common'
 import themePluginConfig from '../config/themePluginConfig'
-import '@/permission'
+// import '@/permission'
 
 import bootstrap from './core/bootstrap'
 import './core/lazy_use'
