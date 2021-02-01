@@ -31,19 +31,14 @@
         <div class="right-main-container">
           <div class="rmc-top-container">
             <dv-border-box-3 class="rmctc-left-container">
-              <ChinaMap
-                @elementClick="
-                  (v) => {
-                    barTitle3 = v.name
-                  }
-                "
-              ></ChinaMap>
+              <div class="order-title">指令发送（近一周）</div>
+              <ChinaMap @elementClick="ChinaMapOnClick"></ChinaMap>
             </dv-border-box-3>
 
             <div class="rmctc-right-container">
-              <dv-border-box-3 class="rmctc-chart-1" >
-                <div class="order-title">指令发送（近一周）</div>
-                <OrderTable></OrderTable>
+              <dv-border-box-3 class="rmctc-chart-1">
+                <!-- <div class="order-title">指令发送（近一周）</div> -->
+                <!-- <OrderTable></OrderTable> -->
               </dv-border-box-3>
 
               <dv-border-box-4 class="rmctc-chart-2" :reverse="true">
@@ -68,6 +63,7 @@
         </div>
       </dv-border-box-1>
     </dv-full-screen-container>
+    <OrderDetailListModal ref="OrderDetailListModal"></OrderDetailListModal>
   </div>
 </template>
 
@@ -79,6 +75,7 @@ import Gauge from '@/views/user/AntvCharts/Gauge'
 import Radar from '@/views/user/AntvCharts/Radar'
 import OrderTable from './OrderTable'
 import ChinaMap from './ChinaMap'
+import OrderDetailListModal from './OrderDetailListModal'
 export default {
   name: 'Demo5',
   components: {
@@ -89,6 +86,7 @@ export default {
     Radar,
     ChinaMap,
     OrderTable,
+    OrderDetailListModal,
   },
   data() {
     return {
@@ -99,15 +97,21 @@ export default {
       innerRadius: 0.6,
     }
   },
+  methods: {
+    ChinaMapOnClick({ data }) {
+      if (data.value > 0) {
+        this.$refs.OrderDetailListModal.show({ data, title: `${data.comName} 失败指令详情` })
+      } else {
+        this.$message.info('该分公司没有失败指令！')
+      }
+    },
+    //
+  },
 }
 </script>
 
 
 <style lang="less">
-
-
-
-
 #data-view {
   width: 100%;
   height: 100%;
@@ -205,11 +209,17 @@ export default {
   padding: 16px 0;
 }
 .order-title {
-  width: 100%;
-  display: block;
-  padding: 6px 0;
-  text-align: center;
-  font-size: 17px;
+  left: 47px;
+  position: absolute;
+  top: 40px;
+  font-size: 16px;
   color: #2862b7b8;
+
+  // width: 100%;
+  // display: block;
+  // padding: 6px 0;
+  // text-align: center;
+  // font-size: 17px;
+  // color: #2862b7b8;
 }
 </style>
