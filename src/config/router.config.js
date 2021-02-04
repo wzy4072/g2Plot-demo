@@ -58,6 +58,11 @@ export const constantRouterMap = [
         name: 'demo5',
         component: () => import(/* webpackChunkName: "t4" */ '@/views/Demo5/index')
       },
+      {
+        path: '/demo6',
+        name: 'demo6',
+        component: () => import(/* webpackChunkName: "t4" */ '@/views/Demo6/index')
+      },
     ]
   },
   {
