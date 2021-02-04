@@ -59,7 +59,7 @@ export default {
             // { gt: 500, lte: 900, label: '正常', color: '#00BAFF' }, // (500, 900]
             // { gt: 310, lte: 500, label: '警告', color: '#3DE7C9' }, // (310, 500]
             // { gt: 200, lte: 300, label: '较差', color: '#FFC530' }, // (200, 300]
-            { gt: 0, lte: 1000, label: '未归集', color: '#0855B2'}, // (10, 200]
+            { gt: 0, lte: 1000, label: '未归集', color: '#0855B2' }, // (10, 200]
             { value: 0, label: '已归集', color: '#fff' }, // [0]
           ],
         },
@@ -76,6 +76,18 @@ export default {
               const item = getValueByName({ list: chartOption.series[0].data, name: params.name })
               // return v ? `${params.name}(${v})` : ''
               return item?.value ? `${item.value}/${item.totalValue}` : ''
+            },
+          },
+          select: {
+            itemStyle: {
+              areaColor: '#EE6666',
+              color: '#EE6666',
+            },
+          },
+          emphasis: {
+            itemStyle: {
+              areaColor: '#EE6666',
+              color: '#EE6666',
             },
           },
           itemStyle: {

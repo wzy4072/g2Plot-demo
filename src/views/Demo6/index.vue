@@ -98,7 +98,7 @@ export default {
   methods: {
     ChinaMapOnClick({ data }) {
       if (data.value > 0) {
-        this.$refs.OrderDetailListModal.show({ data, title: `${data.comName} 失败指令详情` })
+        this.$refs.OrderDetailListModal.show({ data, title: `${data.comName} 归集失败详情` })
       } else {
         this.$message.info('该分公司没有归集失败数据！')
       }
