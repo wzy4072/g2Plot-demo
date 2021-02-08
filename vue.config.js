@@ -110,8 +110,8 @@ const vueConfig = {
       warnings: false,
       errors: false
     },
-    host: '192.168.2.149',
-    // host: 'localhost',
+    // host: '192.168.2.149',
+    host: 'localhost',
     // development server port 8000
     port: 9999,
     // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
